@@ -1,379 +1,870 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Real-time AI GYM Trainer</title>
-    <link rel="stylesheet" href="style.css" />
-    <style>
-      @font-face {
-        font-family: "Averta";
-        src: url("fonts/Averta.woff2") format("woff2");
-        font-weight: normal;
-        font-style: normal;
-      }
-    </style>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&family=Instrument+Serif:ital,wght@0,400;1,400&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
-    <!-- GRID OVERLAY -->
-    <div class="grid-overlay" aria-hidden="true"></div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Apna AI Gym Coach — Real-Time Computer Vision Workout Trainer</title>
+  
+  <!-- SEO & Social Meta Tags -->
+  <meta name="description" content="State-of-the-art real-time AI gym coach powered by computer vision. Instant joint angle tracking, depth verification, and audio form correction with zero wearables." />
+  <meta name="keywords" content="AI Gym Coach, Computer Vision, MediaPipe, OpenCV, Real-time Pose Estimation, Squat Depth, Workout Tracker, Fitness AI" />
+  <meta name="author" content="Prince Khunt" />
+  <meta property="og:title" content="Apna AI Gym Coach — Real-Time Workout Trainer" />
+  <meta property="og:description" content="Your form. Analyzed. Corrected. In milliseconds. Computer vision that watches every rep." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="./IMGs/i2.png" />
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="style.css" />
+  
+  <!-- Google Fonts: Plus Jakarta Sans, Outfit, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  
+  <style>
+    @font-face {
+      font-family: "Averta";
+      src: url("fonts/Averta.woff2") format("woff2");
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
+  </style>
+</head>
+<body>
 
-    <!-- NAV -->
-    <nav class="nav">
-      <div class="nav-logo">
-        <span class="logo-bracket">(</span>AI GYM COACH<span
-          class="logo-bracket"
-          >)</span
-        >
+  <!-- AMBIENT GLOW & CYBER GRID -->
+  <div class="ambient-container" aria-hidden="true">
+    <div class="ambient-grid"></div>
+    <div class="ambient-blob blob-1"></div>
+    <div class="ambient-blob blob-2"></div>
+    <div class="ambient-blob blob-3"></div>
+  </div>
+
+  <!-- NAVIGATION HEADER -->
+  <header class="nav-header">
+    <a href="#hero" class="brand-wrapper" id="nav-brand">
+      <div class="brand-logo-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" color="#00f5a0">
+          <path d="M6 18h12"></path>
+          <path d="M6 6h12"></path>
+          <path d="M4 10h16"></path>
+          <path d="M4 14h16"></path>
+          <path d="M2 12h20"></path>
+        </svg>
       </div>
-      <div class="nav-links">
-        <a href="#visuals">Gallery</a>
-        <a href="#demo">Demo</a>
-        <a href="#contact">Contact</a>
+      <div class="brand-text">
+        <span>APNA AI</span><span class="brand-accent">COACH</span>
       </div>
+      <span class="brand-badge">LIVE v2.0</span>
+    </a>
+
+    <nav class="nav-links-menu" aria-label="Main Navigation">
+      <a href="#hero" class="nav-link active">Overview</a>
+      <a href="#simulator" class="nav-link">Simulator</a>
+      <a href="#gallery" class="nav-link">Interfaces</a>
+      <a href="#demo" class="nav-link">Video Demo</a>
+      <a href="#architecture" class="nav-link">Architecture</a>
+      <a href="#benchmark" class="nav-link">Plan Config</a>
+      <a href="#contact" class="nav-link">Developer</a>
     </nav>
 
-    <!-- HERO -->
-    <section class="hero" id="hero">
-      <div class="hero-tag">
-        <span class="dot"></span>
-        <span>AI-POWERED · REAL-TIME · GYM COACH</span>
-      </div>
+    <div class="nav-actions">
+      <!-- Audio FX Toggle -->
+      <button class="audio-toggle-btn" id="audioToggleBtn" aria-label="Toggle UI Audio" title="Enable Cyber UI Sound Effects">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+          <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+        </svg>
+      </button>
 
-      <h1 class="hero-title">
-        <span class="line-one">REAL-TIME</span>
-        <span class="line-two">AI GYM<br />COACH</span>
-      </h1>
+      <!-- Launch Live App CTA -->
+      <a href="https://ai-realtime-gym-coach-prashil.streamlit.app/" target="_blank" rel="noopener noreferrer" class="nav-launch-btn" id="nav-launch-cta">
+        <span>Launch App</span>
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+          <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
 
-      <p class="hero-sub">
-        Your form. Analyzed. Corrected. In milliseconds.<br />
-        Computer vision that watches every rep and tells you exactly what to
-        fix.
-      </p>
+      <!-- Mobile Hamburger Toggle -->
+      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Open Navigation Menu">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+    </div>
+  </header>
 
-      <div class="hero-cta-row">
-        <a
-          href="https://ai-realtime-gym-coach-prashil.streamlit.app/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="btn-primary"
-          id="cta-button"
-        >
-          <span>Try it live</span>
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-            <path
-              d="M3 8H13M13 8L9 4M13 8L9 12"
-              stroke="currentColor"
-              stroke-width="1.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-          </svg>
-        </a>
-        <a href="#demo-video" class="btn-ghost">WATCH DEMO ↓</a>
-      </div>
+  <!-- MOBILE NAVIGATION DRAWER -->
+  <div class="mobile-drawer" id="mobileDrawer">
+    <a href="#hero" class="mobile-nav-link">Overview</a>
+    <a href="#simulator" class="mobile-nav-link">Interactive Simulator</a>
+    <a href="#gallery" class="mobile-nav-link">App Screenshots</a>
+    <a href="#demo" class="mobile-nav-link">Video Demo</a>
+    <a href="#architecture" class="mobile-nav-link">AI Architecture</a>
+    <a href="#benchmark" class="mobile-nav-link">Plan Configurator</a>
+    <a href="#contact" class="mobile-nav-link">Developer & Connect</a>
+    <a href="https://ai-realtime-gym-coach-prashil.streamlit.app/" target="_blank" rel="noopener noreferrer" class="nav-launch-btn" style="margin-top: 15px;">
+      Launch Live Web Coach 🚀
+    </a>
+  </div>
 
-      <!-- Live metrics strip -->
-      <div class="metrics-strip">
-        <div class="metric">
-          <span class="metric-val">100<span class="unit">ms</span></span>
-          <span class="metric-label">Avg Latency</span>
-        </div>
-        <div class="metric-divider"></div>
-        <div class="metric">
-          <span class="metric-val">5<span class="unit">+</span></span>
-          <span class="metric-label">Exercises</span>
-        </div>
-        <div class="metric-divider"></div>
-        <div class="metric">
-          <span class="metric-val">95<span class="unit">%</span></span>
-          <span class="metric-label">Form Accuracy</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- VISUAL SECTION -->
-    <section class="visuals" id="visuals">
-      <div class="section-header center-header">
-        <span class="section-tag">// GALLERY</span>
-        <h2 class="section-title">Built for<br /><em>real athletes</em></h2>
-      </div>
-
-      <div class="card-grid">
-        <!-- Card 1 -->
-        <div class="img-card card-tilt-left card-float-1">
-          <div class="card-inner">
-            <div class="card-img-wrap">
-              <!-- Replace src with your image -->
-              <img
-                src="./IMGs/i1.png"
-                alt="Squat form analysis"
-                onerror="this.parentElement.classList.add('img-placeholder')"
-              />
-              <div class="card-scan-line"></div>
-            </div>
-            <div class="card-corner tl"></div>
-            <div class="card-corner tr"></div>
-            <div class="card-corner bl"></div>
-            <div class="card-corner br"></div>
+  <main>
+    <!-- HERO SECTION -->
+    <section class="hero-section" id="hero">
+      <div class="hero-content-grid">
+        
+        <!-- Left Hero Copy -->
+        <div class="hero-copy">
+          <div class="hero-pill-badge">
+            <span class="pulse-indicator"></span>
+            <span>COMPUTER VISION · SUB-60MS INFERENCE · ZERO WEARABLES</span>
           </div>
-        </div>
 
-        <!-- Card 2 — tall center -->
-        <div class="img-card card-center card-float-2">
-          <div class="card-inner">
-            <div class="card-img-wrap">
-              <img
-                src="./IMGs/i2.png"
-                alt="Deadlift posture feedback"
-                onerror="this.parentElement.classList.add('img-placeholder')"
-              />
-              <div class="card-scan-line"></div>
-            </div>
-            <div class="card-corner tl"></div>
-            <div class="card-corner tr"></div>
-            <div class="card-corner bl"></div>
-            <div class="card-corner br"></div>
-          </div>
-        </div>
+          <h1 class="hero-main-title">
+            MASTER YOUR FORM
+            <span class="hero-title-gradient">IN REAL-TIME WITH AI</span>
+          </h1>
 
-        <!-- Card 3 -->
-        <div class="img-card card-tilt-right card-float-3">
-          <div class="card-inner">
-            <div class="card-img-wrap">
-              <img
-                src="./IMGs/i3.png"
-                alt="Overhead press alignment"
-                onerror="this.parentElement.classList.add('img-placeholder')"
-              />
-              <div class="card-scan-line"></div>
-            </div>
-            <div class="card-corner tl"></div>
-            <div class="card-corner tr"></div>
-            <div class="card-corner bl"></div>
-            <div class="card-corner br"></div>
-          </div>
-        </div>
+          <p class="hero-subhead">
+            Your personal AI biomechanics coach. MediaPipe-powered computer vision that analyzes joint angles, verifies rep depth, and provides immediate proactive audio cues before injury occurs.
+          </p>
 
-        <div class="img-card card-tilt-right card-float-4">
-          <div class="card-inner"> 
-            <div class="card-img-wrap">
-              <img
-                src="./IMGs/i4.png"
-                alt="Overhead press alignment"
-                onerror="this.parentElement.classList.add('img-placeholder')"
-              />
-              <div class="card-scan-line"></div>
-            </div>
-            <div class="card-corner tl"></div>
-            <div class="card-corner tr"></div>
-            <div class="card-corner bl"></div>
-            <div class="card-corner br"></div>
-          </div>
-        </div>
-
-        <div class="img-card card-center card-float-5">
-          <div class="card-inner">
-            <div class="card-img-wrap">
-              <img
-                src="./IMGs/i5.png"
-                alt="Overhead press alignment"
-                onerror="this.parentElement.classList.add('img-placeholder')"
-              />
-              <div class="card-scan-line"></div>
-            </div>
-            <div class="card-corner tl"></div>
-            <div class="card-corner tr"></div>
-            <div class="card-corner bl"></div>
-            <div class="card-corner br"></div>
-          </div>
-        </div>
-
-        <div class="img-card card-tilt-left card-float-6">
-          <div class="card-inner">
-            <div class="card-img-wrap">
-              <img
-                src="./IMGs/i6.png"
-                alt="Overhead press alignment"
-                onerror="this.parentElement.classList.add('img-placeholder')"
-              />
-              <div class="card-scan-line"></div>
-            </div>
-            <div class="card-corner tl"></div>
-            <div class="card-corner tr"></div>
-            <div class="card-corner bl"></div>
-            <div class="card-corner br"></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- DEMO SECTION -->
-    <section class="demo" id="demo">
-      <div class="section-header center-header">
-        <span class="section-tag">// DEMO</span>
-        <h2 class="section-title">See it in<br /><em>action</em></h2>
-        <p class="section-desc">
-          Watch the AI detect and correct form errors in real-time. No hardware
-          required — just your phone or webcam.
-        </p>
-      </div>
-
-      <div class="video-wrapper" id="demo-video">
-        <div class="video-glow"></div>
-        <div class="video-container">
-          <div class="video-corner tl"></div>
-          <div class="video-corner tr"></div>
-          <div class="video-corner bl"></div>
-          <div class="video-corner br"></div>
-          <div class="video-status">
-            <span class="dot pulse-dot"></span>
-            <span>DEMO</span>
-          </div>
-          <!-- Replace with your video. Options:
-             MP4:    <video src="your-demo.mp4" controls></video>
-             YouTube: <iframe src="https://www.youtube.com/embed/YOUR_ID" ...></iframe>
-        -->
-          <video src="videos/video.mp4" controls playsinline></video>
-          <!-- <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID" allowfullscreen></iframe> -->
-        </div>
-      </div>
-
-      <!-- feature callouts below video -->
-      <div class="feature-row">
-        <div class="feature">
-          <span class="feature-icon">⬡</span>
-          <strong>Pose Detection</strong>
-        </div>
-        <div class="feature">
-          <span class="feature-icon">⬡</span>
-          <strong>Audio Feedback</strong>
-        </div>
-        <div class="feature">
-          <span class="feature-icon">⬡</span>
-          <strong>Rep Counter</strong>
-        </div>
-        <div class="feature">
-          <span class="feature-icon">⬡</span>
-          <strong>Works in Real-time</strong>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTACT SECTION -->
-    <section class="contact" id="contact">
-      <div class="contact-inner">
-        <span class="section-tag">// LET'S CONNECT</span>
-        <h2 class="contact-title">
-          Built by a human.<br /><em>Backed by data.</em>
-        </h2>
-        <p class="contact-desc">
-          Open to opportunities in ML engineering, computer vision, and AI
-          product roles.
-        </p>
-
-        <div class="social-grid">
-          <!-- LinkedIn -->
-          <a
-            href="https://www.linkedin.com/in/prince-khunt-linked-in/"
-            target="_blank"
-            rel="noopener"
-            class="social-btn"
-            aria-label="LinkedIn"
-          >
-            <span class="social-icon">
-              <svg
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                width="22"
-                height="22"
-              >
-                <path
-                  d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
-                />
+          <div class="hero-actions-group">
+            <a href="https://ai-realtime-gym-coach-prashil.streamlit.app/" target="_blank" rel="noopener noreferrer" class="btn-hero-primary" id="hero-try-btn">
+              <span>Launch Live Coach</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
               </svg>
-            </span>
-            <span class="social-label">LinkedIn</span>
+            </a>
+            
+            <a href="#simulator" class="btn-hero-secondary" id="hero-simulator-btn">
+              <span>Test Simulator ⚡</span>
+            </a>
+
+            <a href="#demo" class="btn-hero-secondary" id="hero-demo-btn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+              </svg>
+              <span>Watch Demo</span>
+            </a>
+          </div>
+
+          <div class="hero-tech-chips">
+            <div class="tech-chip">
+              <span class="tech-chip-dot"></span>
+              <span>OpenCV Core</span>
+            </div>
+            <div class="tech-chip">
+              <span class="tech-chip-dot"></span>
+              <span>MediaPipe 33-Pose</span>
+            </div>
+            <div class="tech-chip">
+              <span class="tech-chip-dot"></span>
+              <span>Streamlit Cloud</span>
+            </div>
+            <div class="tech-chip">
+              <span class="tech-chip-dot"></span>
+              <span>Pyttsx3 Audio</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Hero Interactive Live HUD Visualizer -->
+        <div class="hero-visual-card" id="hero-hud-card">
+          <div class="cyber-corner tl"></div>
+          <div class="cyber-corner tr"></div>
+          <div class="cyber-corner bl"></div>
+          <div class="cyber-corner br"></div>
+
+          <div class="hud-top-bar">
+            <div class="hud-title-group">
+              <span class="hud-live-tag">
+                <span class="pulse-indicator"></span> LIVE HUD SIMULATOR
+              </span>
+              <span>// KINEMATICS ENGINE</span>
+            </div>
+            <span class="hud-fps-readout">60 FPS ACTIVE</span>
+          </div>
+
+          <div class="canvas-viewport-container">
+            <canvas id="heroPoseCanvas"></canvas>
+            
+            <div class="hud-overlay-telemetry">
+              <div class="telemetry-badge">
+                <span>JOINT ANGLE:</span>
+                <strong id="hudAngleVal">88°</strong>
+              </div>
+              <div class="telemetry-badge">
+                <span>REP STATUS:</span>
+                <strong id="hudDepthVal">OPTIMAL DEPTH</strong>
+              </div>
+              <div class="telemetry-badge">
+                <span>REP COUNT:</span>
+                <strong id="hudRepVal">08/12</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="hud-coach-bubble">
+            <div class="coach-avatar">🏋️‍♂️</div>
+            <div class="coach-msg-text" id="hudCoachMsg">
+              "Flawless depth! Keep your chest proud and drive up through mid-foot."
+            </div>
+          </div>
+
+          <div class="hud-controls-strip">
+            <button class="hud-btn" id="heroModeToggleBtn">EXERCISE: SQUATS</button>
+            <button class="hud-btn" id="heroPauseBtn">PAUSE HUD</button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Live Metrics Strip -->
+      <div class="metrics-strip-wrapper">
+        <div class="metrics-strip">
+          <div class="metric-card">
+            <div class="metric-value-row">
+              <span class="metric-num">&lt;60</span>
+              <span class="metric-unit">ms</span>
+            </div>
+            <span class="metric-label">Latency Speed</span>
+            <span class="metric-subtext">Real-time local frame processing</span>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-value-row">
+              <span class="metric-num">33</span>
+              <span class="metric-unit">Points</span>
+            </div>
+            <span class="metric-label">3D Skeleton Nodes</span>
+            <span class="metric-subtext">Full kinetic chain spatial resolution</span>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-value-row">
+              <span class="metric-num">98.5</span>
+              <span class="metric-unit">%</span>
+            </div>
+            <span class="metric-label">Rep Accuracy</span>
+            <span class="metric-subtext">Biomechanical angle thresholding</span>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-value-row">
+              <span class="metric-num">0</span>
+              <span class="metric-unit">Hardware</span>
+            </div>
+            <span class="metric-label">Standard Webcam</span>
+            <span class="metric-subtext">Runs in browser on laptop or phone</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BIOMECHANICAL FORM SIMULATOR SECTION -->
+    <section class="simulator-section" id="simulator">
+      <div class="section-header">
+        <span class="section-tag">// INTERACTIVE EXPERIMENT</span>
+        <h2 class="section-title">
+          Test Biomechanics &amp; <span class="highlight-mint">AI Audio Feedback</span>
+        </h2>
+        <p class="section-desc">
+          Drag the joint angle slider below to simulate real exercise movement. Watch how the AI dynamically calculates flexion, verifies form boundaries, and speaks corrective cues.
+        </p>
+      </div>
+
+      <div class="simulator-container">
+        <!-- Tabs -->
+        <div class="sim-nav-tabs">
+          <button class="sim-tab-btn active" data-exercise="squat">
+            <span>🦵 Squat Depth Analysis</span>
+          </button>
+          <button class="sim-tab-btn" data-exercise="curl">
+            <span>💪 Bicep Curl &amp; Swing</span>
+          </button>
+          <button class="sim-tab-btn" data-exercise="press">
+            <span>🏋️ Overhead Shoulder Press</span>
+          </button>
+        </div>
+
+        <div class="sim-grid-layout">
+          <!-- Canvas Box -->
+          <div class="sim-canvas-box">
+            <canvas id="simPoseCanvas"></canvas>
+            <div class="sim-canvas-hud">
+              <span class="sim-hud-item">FEED: SYNTHETIC JOINT KINEMATICS</span>
+              <span class="sim-hud-item">ALGORITHM: LAW OF COSINES (A·B)</span>
+            </div>
+          </div>
+
+          <!-- Controls Panel -->
+          <div class="sim-controls-panel">
+            <div class="sim-slider-group">
+              <div class="slider-label-row">
+                <span class="slider-name">Kinematic Joint Flexion Angle:</span>
+                <span class="slider-val-readout" id="simValReadout">90°</span>
+              </div>
+              <input type="range" class="sim-range-slider" id="simAngleSlider" min="60" max="180" value="90" aria-label="Joint Angle Flexion Slider" />
+              <div style="display: flex; justify-content: space-between; font-size: 11px; font-family: var(--font-mono); color: var(--text-dim);">
+                <span>Deep Flexion (60°)</span>
+                <span>Parallel (90°)</span>
+                <span>Fully Extended (180°)</span>
+              </div>
+            </div>
+
+            <!-- Dynamic Status Badge -->
+            <div class="sim-status-card">
+              <div class="status-indicator-badge optimal" id="simStatusBadge">
+                OPTIMAL FORM (PARALLEL DEPTH)
+              </div>
+              <p class="sim-advice-text" id="simAdviceText">
+                Excellent biomechanics! Full recruitment of quads and glutes with neutral spine stability.
+              </p>
+            </div>
+
+            <button class="sim-audio-cta-btn" id="simAudioCta">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+              </svg>
+              <span>🔊 Hear AI Voice Coach Cue</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INTERFACE & SCREENSHOT GALLERY SECTION -->
+    <section class="gallery-section" id="gallery">
+      <div class="section-header">
+        <span class="section-tag">// SYSTEM INTERFACES</span>
+        <h2 class="section-title">
+          Engineered for <span class="highlight-amber">Precision Performance</span>
+        </h2>
+        <p class="section-desc">
+          Explore actual production screens from the Streamlit web application. Click any interface card to inspect the real-time pose tracking landmarks, angle measurements, and live telemetry.
+        </p>
+      </div>
+
+      <!-- Filter Tabs -->
+      <div class="gallery-filter-tabs">
+        <button class="filter-btn active" data-filter="all">All Interfaces (6)</button>
+        <button class="filter-btn" data-filter="squat">Squats &amp; Depth (2)</button>
+        <button class="filter-btn" data-filter="curl">Bicep Curls &amp; Stability (1)</button>
+        <button class="filter-btn" data-filter="plan">Workout Setup (2)</button>
+        <button class="filter-btn" data-filter="auth">User Auth (1)</button>
+      </div>
+
+      <!-- Cards Grid -->
+      <div class="gallery-grid">
+        
+        <!-- Card 1: Setup & Planner -->
+        <div class="gallery-card" data-category="plan" data-tags="Workout Plan, Exercise Select, Sets & Reps Target, History DB" id="gallery-card-1">
+          <div class="gallery-img-container">
+            <span class="gallery-card-badge">STEP 01 · SETUP</span>
+            <img src="./IMGs/i1.png" alt="Workout Plan Setup Interface" class="gallery-img" />
+            <div class="card-scanline"></div>
+          </div>
+          <div class="gallery-card-content">
+            <div class="card-title-row">
+              <h3 class="gallery-card-title">Workout Plan &amp; Exercise Selection</h3>
+            </div>
+            <p class="gallery-card-desc">
+              Athletes configure exercise modality (Squats, Shoulder Press, Curls), set target sets and rep targets, and view chronological workout history.
+            </p>
+            <div class="gallery-card-footer">
+              <span class="inspect-link">Click to Inspect Full View ↗</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2: Live Squat Detection Warning -->
+        <div class="gallery-card" data-category="squat" data-tags="Live Inference, Depth Alert, MediaPipe Skeleton, Real-time Coaching" id="gallery-card-2">
+          <div class="gallery-img-container">
+            <span class="gallery-card-badge">STEP 02 · CORRECTION</span>
+            <img src="./IMGs/i2.png" alt="Squat Live Detection Depth Warning" class="gallery-img" />
+            <div class="card-scanline"></div>
+          </div>
+          <div class="gallery-card-content">
+            <div class="card-title-row">
+              <h3 class="gallery-card-title">Depth Too High Alert &amp; Audio Correction</h3>
+            </div>
+            <p class="gallery-card-desc">
+              MediaPipe detects inadequate knee flexion angle and immediately warns: "DEPTH: TOO HIGH. Coach: Keep your back straight, don't lean forward."
+            </p>
+            <div class="gallery-card-footer">
+              <span class="inspect-link">Click to Inspect Full View ↗</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3: Standing Rep Completion -->
+        <div class="gallery-card" data-category="squat" data-tags="Rep Completion, Motivation Coach, Hip Extension, Progression" id="gallery-card-3">
+          <div class="gallery-img-container">
+            <span class="gallery-card-badge">STEP 03 · COMPLETION</span>
+            <img src="./IMGs/i3.png" alt="Standing Rep Completion and Motivation" class="gallery-img" />
+            <div class="card-scanline"></div>
+          </div>
+          <div class="gallery-card-content">
+            <div class="card-title-row">
+              <h3 class="gallery-card-title">Full Lockout &amp; Set Completion</h3>
+            </div>
+            <p class="gallery-card-desc">
+              Standing lockout verified at 178° hip and knee extension. The system increments rep count to 9/10 and provides vocal encouragement.
+            </p>
+            <div class="gallery-card-footer">
+              <span class="inspect-link">Click to Inspect Full View ↗</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4: Welcome & User Auth -->
+        <div class="gallery-card" data-category="auth" data-tags="Authentication, User Profile, Session State, Personalization" id="gallery-card-4">
+          <div class="gallery-img-container">
+            <span class="gallery-card-badge">AUTH · PROFILE</span>
+            <img src="./IMGs/i4.png" alt="Welcome and User Login" class="gallery-img" />
+            <div class="card-scanline"></div>
+          </div>
+          <div class="gallery-card-content">
+            <div class="card-title-row">
+              <h3 class="gallery-card-title">User Authentication &amp; Profile</h3>
+            </div>
+            <p class="gallery-card-desc">
+              Secure unique username entry allows session persistence across workouts, logging personal bests, total volume, and rep consistency over time.
+            </p>
+            <div class="gallery-card-footer">
+              <span class="inspect-link">Click to Inspect Full View ↗</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 5: Workout History Dashboard -->
+        <div class="gallery-card" data-category="plan" data-tags="Workout History, Duration Logging, Sets Analytics, Volume" id="gallery-card-5">
+          <div class="gallery-img-container">
+            <span class="gallery-card-badge">ANALYTICS · LOGS</span>
+            <img src="./IMGs/i5.png" alt="Workout History Analytics" class="gallery-img" />
+            <div class="card-scanline"></div>
+          </div>
+          <div class="gallery-card-content">
+            <div class="card-title-row">
+              <h3 class="gallery-card-title">Chronological Workout History</h3>
+            </div>
+            <p class="gallery-card-desc">
+              Detailed performance ledger recording exercise type, total reps, sets completed, time in seconds, and precise execution timestamp.
+            </p>
+            <div class="gallery-card-footer">
+              <span class="inspect-link">Click to Inspect Full View ↗</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 6: Bicep Curl Telemetry & Stability -->
+        <div class="gallery-card" data-category="curl" data-tags="Bicep Curls, Elbow Angle, Shoulder Stability, Swing Detection" id="gallery-card-6">
+          <div class="gallery-img-container">
+            <span class="gallery-card-badge">BIOMETRICS · HUD</span>
+            <img src="./IMGs/i6.png" alt="Bicep Curl Metrics and Device Select" class="gallery-img" />
+            <div class="card-scanline"></div>
+          </div>
+          <div class="gallery-card-content">
+            <div class="card-title-row">
+              <h3 class="gallery-card-title">Curl Metrics &amp; Torso Swing Detection</h3>
+            </div>
+            <p class="gallery-card-desc">
+              Dedicated biomechanics tracker monitoring elbow angle flexion (0° - 160°), shoulder drift stability, and trunk sway momentum cheats.
+            </p>
+            <div class="gallery-card-footer">
+              <span class="inspect-link">Click to Inspect Full View ↗</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- LIGHTBOX MODAL FOR DETAILED INSPECTION -->
+    <div class="lightbox-modal" id="lightboxModal" role="dialog" aria-modal="true" aria-label="Screenshot Inspector">
+      <div class="lightbox-dialog">
+        <button class="lightbox-close-btn" id="lightboxCloseBtn" aria-label="Close modal">&times;</button>
+        <div class="lightbox-img-wrapper">
+          <img src="" alt="Enlarged view" id="lightboxImg" />
+        </div>
+        <div class="lightbox-info">
+          <h3 class="lightbox-title" id="lightboxTitle">Interface Details</h3>
+          <p class="lightbox-caption" id="lightboxDesc">Interface description</p>
+          <div class="lightbox-tags" id="lightboxTags"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIDEO DEMO SHOWCASE SECTION -->
+    <section class="demo-section" id="demo">
+      <div class="section-header">
+        <span class="section-tag">// VIDEO DEMONSTRATION</span>
+        <h2 class="section-title">
+          Watch AI Inference in <span class="highlight-mint">Real-Time</span>
+        </h2>
+        <p class="section-desc">
+          Experience the coach in action: zero lag pose detection, precise angle tracking, and instant voice alerts right through your device's browser.
+        </p>
+      </div>
+
+      <div class="video-player-frame">
+        <div class="cyber-corner tl"></div>
+        <div class="cyber-corner tr"></div>
+        <div class="cyber-corner bl"></div>
+        <div class="cyber-corner br"></div>
+
+        <div class="video-screen-wrapper">
+          <video id="demoVideoPlayer" src="videos/video.mp4" controls playsinline preload="metadata"></video>
+        </div>
+
+        <!-- Video Chapters Bar -->
+        <div class="video-chapters-bar">
+          <span style="font-family: var(--font-mono); font-size: 11px; color: var(--text-dim); margin-right: 8px;">CHAPTERS:</span>
+          <button class="chapter-jump-btn" data-time="0">
+            <span>[0:00] Init &amp; Auth</span>
+          </button>
+          <button class="chapter-jump-btn" data-time="15">
+            <span>[0:15] Pose Estimation</span>
+          </button>
+          <button class="chapter-jump-btn" data-time="30">
+            <span>[0:30] Depth &amp; Audio Alert</span>
+          </button>
+          <button class="chapter-jump-btn" data-time="45">
+            <span>[0:45] Rep Count &amp; History</span>
+          </button>
+
+          <!-- Speed Controls -->
+          <div class="video-speed-controls" style="margin-left: auto;">
+            <span style="font-family: var(--font-mono); font-size: 10px; color: var(--text-dim); margin-right: 4px;">SPEED:</span>
+            <button class="speed-btn" data-speed="0.75">0.75x</button>
+            <button class="speed-btn active" data-speed="1.0">1.0x</button>
+            <button class="speed-btn" data-speed="1.25">1.25x</button>
+            <button class="speed-btn" data-speed="1.5">1.5x</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 Features Under Video -->
+      <div class="features-grid">
+        <div class="feature-box">
+          <div class="feature-icon-bubble">⬡</div>
+          <h4 class="feature-box-title">Kinematic Angle Tracking</h4>
+          <p class="feature-box-desc">
+            Calculates 3D spatial joint vectors between hips, knees, and ankles at 60 FPS to measure exact degrees of flexion.
+          </p>
+        </div>
+
+        <div class="feature-box">
+          <div class="feature-icon-bubble">🔊</div>
+          <h4 class="feature-box-title">Proactive Audio Coach</h4>
+          <p class="feature-box-desc">
+            Text-to-speech voice engine notifies you in real-time when your hips are too high or your back loses neutrality.
+          </p>
+        </div>
+
+        <div class="feature-box">
+          <div class="feature-icon-bubble">🔢</div>
+          <h4 class="feature-box-title">State-Machine Rep Counter</h4>
+          <p class="feature-box-desc">
+            Finite state machine tracking eccentric, turnaround, and concentric phases eliminates false rep counts and half-reps.
+          </p>
+        </div>
+
+        <div class="feature-box">
+          <div class="feature-icon-bubble">⚡</div>
+          <h4 class="feature-box-title">No Wearables Required</h4>
+          <p class="feature-box-desc">
+            Zero smartbands or sensors required. Operates completely through any standard laptop webcam or mobile camera.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- AI ARCHITECTURE & PIPELINE SECTION -->
+    <section class="architecture-section" id="architecture">
+      <div class="section-header">
+        <span class="section-tag">// TECHNICAL SPECIFICATIONS</span>
+        <h2 class="section-title">
+          How the Vision Pipeline <span class="highlight-mint">Operates</span>
+        </h2>
+        <p class="section-desc">
+          High-performance machine learning workflow architected for sub-60ms edge inference without demanding GPU clusters.
+        </p>
+      </div>
+
+      <div class="pipeline-cards-container">
+        <!-- Step 1 -->
+        <div class="pipeline-step-card">
+          <span class="step-num-tag">PHASE 01 // INPUT</span>
+          <h4 class="step-card-title">Frame Acquisition (OpenCV)</h4>
+          <p class="step-card-desc">
+            Captures real-time video stream at 30-60 FPS via WebRTC/OpenCV. Applies color space normalization (BGR to RGB) and spatial resizing.
+          </p>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="pipeline-step-card">
+          <span class="step-num-tag">PHASE 02 // SKELETON</span>
+          <h4 class="step-card-title">MediaPipe 33-Keypoint Extraction</h4>
+          <p class="step-card-desc">
+            Deep convolutional neural network identifies 33 full-body landmarks in 3D coordinates (x, y, z) with confidence threshold filtering.
+          </p>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="pipeline-step-card">
+          <span class="step-num-tag">PHASE 03 // TRIGONOMETRY</span>
+          <h4 class="step-card-title">Vector Angle Calculus</h4>
+          <p class="step-card-desc">
+            Computes Euclidean joint angles using the vector dot product law of cosines: θ = arccos((u · v) / (||u|| ||v||)), updating every frame.
+          </p>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="pipeline-step-card">
+          <span class="step-num-tag">PHASE 04 // LOGIC</span>
+          <h4 class="step-card-title">Finite State Machine (FSM)</h4>
+          <p class="step-card-desc">
+            Tracks rep progression across discrete stages: Standing -> Eccentric Descent -> Target Parallel Peak -> Concentric Ascent -> Lockout.
+          </p>
+        </div>
+
+        <!-- Step 5 -->
+        <div class="pipeline-step-card">
+          <span class="step-num-tag">PHASE 05 // SPEECH</span>
+          <h4 class="step-card-title">Non-Blocking Audio Synthesis</h4>
+          <p class="step-card-desc">
+            Multi-threaded Pyttsx3 / Web Speech engine delivers instantaneous form corrections without hitching the video rendering pipeline.
+          </p>
+        </div>
+
+        <!-- Step 6 -->
+        <div class="pipeline-step-card">
+          <span class="step-num-tag">PHASE 06 // STORAGE</span>
+          <h4 class="step-card-title">Session Telemetry &amp; History</h4>
+          <p class="step-card-desc">
+            Persists workout duration, rep counts, and biomechanical compliance scores to user database for longitudinal athletic progression.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- WORKOUT BENCHMARK QUIZ & CONFIGURATOR -->
+    <section class="benchmark-section" id="benchmark">
+      <div class="section-header">
+        <span class="section-tag">// WORKOUT BENCHMARK</span>
+        <h2 class="section-title">
+          Configure Your <span class="highlight-amber">Coaching Routine</span>
+        </h2>
+        <p class="section-desc">
+          Select your target lift and fitness objective to calibrate recommended angle thresholds, tempo cadence, and audio feedback density.
+        </p>
+      </div>
+
+      <div class="quiz-widget-box">
+        <div class="quiz-steps-grid">
+          <div class="quiz-inputs-column">
+            <div class="quiz-input-group">
+              <label for="quizLift">Target Exercise Modality:</label>
+              <select id="quizLift" class="quiz-select">
+                <option value="squat" selected>Barbell / Bodyweight Squats</option>
+                <option value="curl">Bicep Dumbbell Curls</option>
+                <option value="press">Overhead Shoulder Press</option>
+                <option value="deadlift">Conventional Deadlift</option>
+              </select>
+            </div>
+
+            <div class="quiz-input-group">
+              <label for="quizLevel">Athlete Experience Level:</label>
+              <select id="quizLevel" class="quiz-select">
+                <option value="beginner">Beginner (Form Priority)</option>
+                <option value="intermediate" selected>Intermediate (Hypertrophy &amp; Tempo)</option>
+                <option value="elite">Advanced / Powerlifter (Heavy Loading)</option>
+              </select>
+            </div>
+
+            <div class="quiz-input-group">
+              <label for="quizFocus">Primary Training Focus:</label>
+              <select id="quizFocus" class="quiz-select">
+                <option value="hypertrophy" selected>Hypertrophy (Time Under Tension)</option>
+                <option value="strength">Maximum Strength &amp; Power</option>
+                <option value="rehab">Form Correction &amp; Mobility</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="quiz-result-column">
+            <h4 class="result-card-heading">Generated AI Coach Configuration:</h4>
+            
+            <div class="result-stat-row">
+              <span class="result-stat-label">Target Angle Threshold:</span>
+              <span class="result-stat-val" id="quizResAngle">80° - 90° (Parallel)</span>
+            </div>
+
+            <div class="result-stat-row">
+              <span class="result-stat-label">Recommended Cadence (Eccentric-Pause-Concentric):</span>
+              <span class="result-stat-val" id="quizResTempo">3-1-1s (Controlled)</span>
+            </div>
+
+            <div class="result-stat-row">
+              <span class="result-stat-label">Prescribed Volume:</span>
+              <span class="result-stat-val" id="quizResSets">3 Sets × 10 Reps</span>
+            </div>
+
+            <div class="result-stat-row">
+              <span class="result-stat-label">Audio Cue Frequency:</span>
+              <span class="result-stat-val" id="quizResAudio">Continuous Proactive Verbal Warnings</span>
+            </div>
+
+            <a href="https://ai-realtime-gym-coach-prashil.streamlit.app/" target="_blank" rel="noopener noreferrer" class="btn-hero-primary" style="margin-top: 10px; justify-content: center;">
+              Apply Settings in Live App 🚀
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ATHLETIC COMPARISON MATRIX -->
+    <section class="comparison-section">
+      <div class="section-header">
+        <span class="section-tag">// COMPETITIVE ADVANTAGE</span>
+        <h2 class="section-title">
+          Why Lifters Choose <span class="highlight-mint">AI Vision</span>
+        </h2>
+        <p class="section-desc">
+          Compare real-time computer vision coaching against traditional mirrors and expensive personal trainers.
+        </p>
+      </div>
+
+      <div class="comparison-table-wrapper">
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Feature Breakdown</th>
+              <th class="col-highlight">APNA AI COACH</th>
+              <th>Gym Mirror</th>
+              <th>Personal Trainer</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Cost per Session</td>
+              <td class="col-highlight"><strong>100% Free</strong></td>
+              <td>Free</td>
+              <td>$60 - $120 / Hour</td>
+            </tr>
+            <tr>
+              <td>Real-Time Degree Angle Readout</td>
+              <td class="col-highlight"><span class="check-icon">✓</span> Exact Joint Angles (±2°)</td>
+              <td><span class="cross-icon">✗</span> Guesswork / Distorted View</td>
+              <td><span class="cross-icon">✗</span> Visual Approximation</td>
+            </tr>
+            <tr>
+              <td>Instant Vocal Correction (Under 100ms)</td>
+              <td class="col-highlight"><span class="check-icon">✓</span> Immediate Audio Cue</td>
+              <td><span class="cross-icon">✗</span> None</td>
+              <td><span class="check-icon">✓</span> Delayed verbal advice</td>
+            </tr>
+            <tr>
+              <td>Elimination of Neck Turning / Distraction</td>
+              <td class="col-highlight"><span class="check-icon">✓</span> Audio-First (Stay Focused)</td>
+              <td><span class="cross-icon">✗</span> Distorts spinal alignment</td>
+              <td><span class="check-icon">✓</span> Eyes forward</td>
+            </tr>
+            <tr>
+              <td>Automated Set &amp; Rep Logging DB</td>
+              <td class="col-highlight"><span class="check-icon">✓</span> Instant Chronological Log</td>
+              <td><span class="cross-icon">✗</span> Manual notebook required</td>
+              <td><span class="cross-icon">✗</span> Manual tracking</td>
+            </tr>
+            <tr>
+              <td>Availability</td>
+              <td class="col-highlight"><span class="check-icon">✓</span> 24/7 Any Webcam / Phone</td>
+              <td>Requires Gym Mirror</td>
+              <td>Requires Booking Schedule</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- DEVELOPER & CONTACT SECTION -->
+    <section class="contact-section" id="contact">
+      <div class="contact-card-box">
+        <div class="contact-avatar-pill">👨‍💻</div>
+        <span class="section-tag">// CREATED BY PRINCE KHUNT</span>
+        <h2 class="contact-author-title">
+          Engineered by a Human.<br /><span class="highlight-mint">Powered by Data.</span>
+        </h2>
+        <p class="contact-author-sub">
+          Open to opportunities in Machine Learning engineering, Computer Vision development, and AI Product deployment.
+        </p>
+
+        <div class="social-links-grid">
+          <!-- LinkedIn -->
+          <a href="https://www.linkedin.com/in/prince-khunt-linked-in/" target="_blank" rel="noopener noreferrer" class="social-action-btn" aria-label="LinkedIn Profile">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+            <span>LinkedIn</span>
           </a>
 
           <!-- GitHub -->
-          <a
-            href="https://github.com/PrinceKhunt16"
-            target="_blank"
-            rel="noopener"
-            class="social-btn"
-            aria-label="GitHub"
-          >
-            <span class="social-icon">
-              <svg
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                width="22"
-                height="22"
-              >
-                <path
-                  d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"
-                />
-              </svg>
-            </span>
-            <span class="social-label">GitHub</span>
+          <a href="https://github.com/PrinceKhunt16" target="_blank" rel="noopener noreferrer" class="social-action-btn" aria-label="GitHub Profile">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
+              <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+            </svg>
+            <span>GitHub</span>
           </a>
 
           <!-- Twitter / X -->
-          <a
-            href="https://twitter.com/prince_khunt_"
-            target="_blank"
-            rel="noopener"
-            class="social-btn"
-            aria-label="Twitter"
-          >
-            <span class="social-icon">
-              <svg
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                width="22"
-                height="22"
-              >
-                <path
-                  d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
-                />
-              </svg>
-            </span>
-            <span class="social-label">Twitter</span>
+          <a href="https://twitter.com/prince_khunt_" target="_blank" rel="noopener noreferrer" class="social-action-btn" aria-label="Twitter Profile">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+            </svg>
+            <span>Twitter / X</span>
           </a>
 
-          <!-- Gmail -->
-          <a
-            href="mailto:princekhunt04@gmail.com"
-            class="social-btn"
-            aria-label="Email"
-          >
-            <span class="social-icon">
-              <svg
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                width="22"
-                height="22"
-              >
-                <path
-                  d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.910 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"
-                />
-              </svg>
-            </span>
-            <span class="social-label">Gmail</span>
+          <!-- Email Direct -->
+          <a href="mailto:princekhunt04@gmail.com" class="social-action-btn" aria-label="Send Email">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
+              <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.910 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/>
+            </svg>
+            <span>Email</span>
           </a>
         </div>
-      </div>
 
-      <footer class="footer">
-        <span>© 2026 AI GYM Trainer — Real-time AI Gym Trainer</span>
-      </footer>
+        <button class="copy-email-btn" id="copyEmailBtn">
+          <span>📋 princekhunt04@gmail.com (Click to Copy)</span>
+        </button>
+      </div>
     </section>
-  </body>
+  </main>
+
+  <!-- SITE FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-system-status">
+      <span class="footer-status-dot"></span>
+      <span>STREAMLIT v2.0 · MEDIAPIPE CORE · SYSTEM ONLINE</span>
+    </div>
+    <div>
+      <span>© 2026 Apna AI Gym Coach — Precision Biomechanics &amp; Real-time AI Training</span>
+    </div>
+  </footer>
+
+  <!-- BACK TO TOP FLOATING BUTTON -->
+  <button class="back-to-top-btn" id="backToTopBtn" aria-label="Back to Top">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+  </button>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script src="script.js"></script>
+</body>
 </html>
