@@ -769,7 +769,7 @@ function initScrollEffects() {
   const copyEmailBtn = document.getElementById('copyEmailBtn');
   if (copyEmailBtn) {
     copyEmailBtn.addEventListener('click', () => {
-      const email = 'princekhunt04@gmail.com';
+      const email = 'kagatharaprashilkumar1526@gmail.com';
       navigator.clipboard.writeText(email).then(() => {
         showToast('📋 Email copied to clipboard!');
       }).catch(() => {
