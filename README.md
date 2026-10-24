@@ -2,7 +2,8 @@
 
 <div align="center">
 
-[![Live Demo](https://img.shields.io/badge/Live_App-Streamlit_Cloud-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://ai-realtime-gym-coach-prashil.streamlit.app/)
+[![Live Website](https://img.shields.io/badge/Website-Netlify-00C7B7?style=for-the-badge&logo=netlify&logoColor=white)](https://ai-realtime-gym-coach-prashil.netlify.app/)
+[![Live App](https://img.shields.io/badge/Live_App-Streamlit_Cloud-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://ai-realtime-gym-coach-prashil.streamlit.app/)
 [![MediaPipe](https://img.shields.io/badge/Pose_Estimation-MediaPipe_33--Keypoints-00F5A0?style=for-the-badge&logo=google&logoColor=black)](https://developers.google.com/mediapipe)
 [![OpenCV](https://img.shields.io/badge/Vision_Engine-OpenCV-5C3EE8?style=for-the-badge&logo=opencv&logoColor=white)](https://opencv.org/)
 [![JavaScript](https://img.shields.io/badge/Frontend-Vanilla_ES6+-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
@@ -15,7 +16,7 @@
 
 <br/>
 
-[🚀 Launch Live Web App](https://ai-realtime-gym-coach-prashil.streamlit.app/) • [⚡ Test Web Simulator](#-interactive-biomechanical-simulator) • [📹 Watch Video Demo](#-video-demonstration) • [📐 Biomechanical Pipeline](#-system-architecture--vision-pipeline) • [👨‍💻 Developer](#-developer--connect)
+[🌐 Launch Live Website (Netlify)](https://ai-realtime-gym-coach-prashil.netlify.app/) • [🚀 Launch Streamlit App](https://ai-realtime-gym-coach-prashil.streamlit.app/) • [⚡ Test Web Simulator](#-interactive-biomechanical-simulator) • [📹 Watch Video Demo](#-video-demonstration) • [📐 Biomechanical Pipeline](#-system-architecture--vision-pipeline) • [👨‍💻 Developer](#-developer--connect)
 
 <br/>
 
@@ -207,6 +208,7 @@ A full demonstration video is bundled within the repository at [`videos/video.mp
 ## 🛠️ Tech Stack
 
 ### Web Presentation Hub & Simulator
+- **Hosting & Deployment**: Netlify ([ai-realtime-gym-coach-prashil.netlify.app](https://ai-realtime-gym-coach-prashil.netlify.app/))
 - **Structure**: Semantic HTML5 with accessibility ARIA tags
 - **Styling**: Modern Vanilla CSS3 (Cyber grid backgrounds, glassmorphism, responsive CSS Grid / Flexbox)
 - **Logic & Graphics**: ES6+ JavaScript, HTML5 Canvas 2D API
@@ -248,7 +250,15 @@ AI-Realtime-GYM-Coach-Web/
 
 ## 🚀 Quick Start Guide
 
-### 1. View the Web Hub & Simulator Locally
+### 1. Access the Live Website (Netlify)
+
+The interactive web portal and biomechanical simulator is deployed and hosted live on Netlify:
+
+👉 **[Launch Live Website: ai-realtime-gym-coach-prashil.netlify.app](https://ai-realtime-gym-coach-prashil.netlify.app/)**
+
+---
+
+### 2. View the Web Hub & Simulator Locally
 
 No build tools or package managers are required! You can open the interface in any modern browser:
 
@@ -280,7 +290,7 @@ npx serve .
 
 ---
 
-### 2. Access the Live Computer Vision Web App
+### 3. Access the Live Computer Vision Web App (Streamlit Cloud)
 
 The real-time camera coaching application is deployed and hosted live on Streamlit Cloud:
 
