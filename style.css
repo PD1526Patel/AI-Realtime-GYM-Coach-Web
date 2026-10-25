@@ -455,15 +455,12 @@ section {
   margin-bottom: 18px;
 }
 
-.section-title span.highlight-mint {
+.highlight-mint,
+.section-title span.highlight-mint,
+.contact-author-title span.highlight-mint,
+.section-title span.highlight-amber,
+.highlight-amber {
   background: var(--gradient-text);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.section-title span.highlight-amber {
-  background: var(--gradient-amber);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
